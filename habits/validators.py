@@ -1,12 +1,13 @@
 from rest_framework.serializers import ValidationError
 
+
 class HabitValidator:
     def __call__(self, attrs):
-        is_pleasant = attrs.get('is_pleasant')
-        linked_habit = attrs.get('linked_habit')
-        reward = attrs.get('reward')
-        execution_time = attrs.get('execution_time')
-        periodicity = attrs.get('periodicity')
+        is_pleasant = attrs.get("is_pleasant")
+        linked_habit = attrs.get("linked_habit")
+        reward = attrs.get("reward")
+        execution_time = attrs.get("execution_time")
+        periodicity = attrs.get("periodicity")
 
         if linked_habit and reward:
             raise ValidationError(
@@ -25,9 +26,7 @@ class HabitValidator:
             )
 
         if execution_time is not None and execution_time > 120:
-            raise ValidationError(
-                "Время выполнения должно быть не больше 120 секунд."
-            )
+            raise ValidationError("Время выполнения должно быть не больше 120 секунд.")
 
         if periodicity is not None and (periodicity < 1 or periodicity > 7):
             raise ValidationError(
