@@ -1,9 +1,11 @@
+import logging
+
+import requests
 from celery import shared_task
 from django.conf import settings
 from django.utils import timezone
+
 from habits.models import Habit
-import requests
-import logging
 
 logger = logging.getLogger(__name__)
 

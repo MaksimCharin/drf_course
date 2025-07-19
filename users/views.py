@@ -1,8 +1,10 @@
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
+
 from users.models import User
-from users.serializers import UserSerializer, UserRegisterSerializer
+from users.serializers import UserRegisterSerializer, UserSerializer
 
 
 class UserRegisterAPIView(generics.CreateAPIView):
@@ -20,7 +22,7 @@ class UserRefreshAPIView(TokenRefreshView):
 
 
 class UserListAPIView(generics.ListAPIView):
-    queryset = User.objects.all().order_by('id')
+    queryset = User.objects.all().order_by("id")
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
 

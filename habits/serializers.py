@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from habits.models import Habit
 from habits.validators import HabitValidator
 
@@ -9,7 +10,13 @@ class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
         fields = "__all__"
-        validators = [HabitValidator()]
+
+    def validate(self, attrs):
+        validator = HabitValidator()
+        if self.instance:
+            validator.instance = self.instance
+        validator(attrs)
+        return attrs
 
     def get_linked_habit_data(self, obj):
         """Возвращает упрощенные данные связанной привычки для отображения"""

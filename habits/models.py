@@ -1,5 +1,5 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 
 class Habit(models.Model):
@@ -22,8 +22,8 @@ class Habit(models.Model):
         blank=True,
         verbose_name="Связанная привычка",
         help_text="Привычка, которая связана с другой привычкой, "
-                  "важно указывать для полезных привычек, "
-                  "но не для приятных.",
+        "важно указывать для полезных привычек, "
+        "но не для приятных.",
     )
     periodicity_choices = [
         (1, "Ежедневно"),
@@ -50,14 +50,20 @@ class Habit(models.Model):
     execution_time = models.PositiveSmallIntegerField(
         verbose_name="Время на выполнение (секунды)",
         help_text="Время, которое предположительно потратит пользователь "
-                  "на выполнение привычки (не более 120 секунд).",
+        "на выполнение привычки (не более 120 секунд).",
     )
     is_public = models.BooleanField(
         default=False,
         verbose_name="Признак публичности",
         help_text="Привычки можно публиковать в общий доступ, "
-                  "чтобы другие пользователи могли брать "
-                  "в пример чужие привычки.",
+        "чтобы другие пользователи могли брать "
+        "в пример чужие привычки.",
+    )
+    last_reminder_sent = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Время последней отправки напоминания",
+        help_text="Время, когда было отправлено последнее напоминание о привычке.",
     )
 
     class Meta:
